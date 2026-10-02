@@ -1,0 +1,22 @@
+# Compiled object files
+stegano
+stegano.exe
+*.out
+*.exe
+*.o
+
+# temporary files
+temp_cipher.txt
+decrypted_out.txt
+
+# images, text files
+*.bmp
+*.png
+secret.txt
+extracted.txt
+sec.txt
+
+# IDE specific files
+.vscode/
+.idea/
+build/

@@ -5,6 +5,8 @@ Steganography tool that hide and extract messages from images(BMP) combined with
 ## Features
 * **LSB Stenography -** Embeds binary data into the color channels of BMP images with no perceptible visual changes.
 * **Symmetric encryption -** Built-in modular ASCII-shift encryption to secure message with a custom key integer before embedding.
+* **AES-256-GCM Encryption** - Uses the industrial-grade Crypto++ library to provide authenticated encryption (AEAD), ensuring both confidentiality and data integrity.
+* **SHA-256 Key Derivation** - Safely converts human-readable passwords into 256-bit cryptographic keys and 96-bit Initialization Vectors (IV).
 * **Dual interference -** Supports both **Command-line interface(CLI)** and **Interactive Menu** for ease of use.
 * **No heavy dependencies -** Written entirely in C++using binary file streams and vectors.
 
@@ -23,11 +25,14 @@ Steganography tool that hide and extract messages from images(BMP) combined with
 
 # Usage
 ## Prerequirements:
-You need a C++ compiler that supports C++11 or >(e.g g++, clang++, etc)
+You need: 
+* C++ compiler that supports C++11 or >(e.g g++, clang++, etc)
+* Crypto++ Library(installs via your platform's package manager)
+
 
 ## Compilation
 Clone the repository and compile the source files together:
-> g++ stegano.cpp encrypt.cpp -o stegano
+> g++ Stegano.cpp encrypt.cpp -I. -L./cryptopp -o stegano.exe -lcryptopp
 
 ## Usage Guide
 You can run the tool either via interactive menu(by launching ./stegano without arguments) or via CLI flags:
@@ -35,12 +40,12 @@ You can run the tool either via interactive menu(by launching ./stegano without 
 > ./stegano --help
 ### 2. Hide a message with encryption
 > ./stegano -e -m secret.txt -i input.bmp -o output.bmp
-### 3. Hide a message withour encryption
-> ./stegano -ne -m secret.txt -i input.bmp -o output.bmp
+### 3. Hide a message with AES encryption
+> ./stegano -a -m secret.txt -i input.bmp -o output.bmp
 ### 4. Extract and Decrypt a message
 > ./stegano -d -i input.bmp
-### 5. Extract a message without encryption
-> ./stegano -nd -i input.bmp
+### 5. Extract a message with AES encryption
+> ./stegano -da -i input.bmp
 
 ## How it works
 ​1. Pixel Skip Header: Standard uncompressed BMP files feature a 54-byte file and info header. The tool safely skips these first 54 bytes to preserve image integrity.<br><br>

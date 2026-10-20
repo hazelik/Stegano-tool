@@ -4,17 +4,26 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 using namespace std;
 class endec{
-    int key;
     string fileIn;
     string fileOut;
+    string password;
+    int key;
+
 public:
     string encryptedText;
     string decryptedText;
 
-    endec(string inFile, string outFile): fileIn(inFile), fileOut(outFile), key(0)  {}
+    endec(string in, string out) : fileIn(in), fileOut(out), key(3) {}
+
     void encr();
     void decr();
+
+    void encryptAES(const string& pwd);
+    void decryptAES(const string& pwd);
 };
 #endif // ENCRYPT_HPP
+
+

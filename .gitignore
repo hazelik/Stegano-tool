@@ -20,3 +20,4 @@ sec.txt
 .vscode/
 .idea/
 build/
+/cryptopp
